@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Adee Beauty - Skincare & Kosmetik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fef7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(to right, #ffb6c1, #ffd1dc);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+            color: #ff4081;
+        }
+        
+        .logo-text {
+            font-size: 26px;
+            font-weight: 700;
+            color: #d81b60;
+        }
+        
+        .logo-subtext {
+            font-size: 14px;
+            color: #880e4f;
+            font-weight: 500;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #880e4f;
+            font-weight: 600;
+            font-size: 17px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: #ff4081;
+            color: white;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #d81b60;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Home Page */
+        .hero {
+            background: linear-gradient(rgba(255, 182, 193, 0.85), rgba(255, 209, 220, 0.9)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: #880e4f;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 40px auto;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 18px 25px;
+            border-radius: 50px;
+            border: 2px solid #ff4081;
+            font-size: 16px;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.2);
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-box button:hover {
+            background-color: #d81b60;
+        }
+        
+        .featured-product {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+            border: 1px solid #ffd1dc;
+        }
+        
+        .featured-product h2 {
+            color: #d81b60;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        /* Product Cards */
+        .product-card {
+            display: inline-block;
+            width: 280px;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.1);
+            margin: 15px;
+            transition: transform 0.3s;
+            vertical-align: top;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 280px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            color: #880e4f;
+            margin-bottom: 10px;
+            font-size: 20px;
+            min-height: 48px;
+        }
+        
+        .product-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+        
+        .product-link {
+            display: inline-block;
+            background-color: #ff4081;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .product-link:hover {
+            background-color: #d81b60;
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category-btn {
+            background-color: white;
+            border: 2px solid #ffb6c1;
+            padding: 10px 25px;
+            border-radius: 50px;
+            color: #880e4f;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background-color: #ff4081;
+            color: white;
+            border-color: #ff4081;
+        }
+        
+        .product-category {
+            display: none;
+        }
+        
+        .product-category.active {
+            display: block;
+        }
+        
+        /* About Page - Sederhana */
+        .about-simple {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .about-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ffd1dc;
+            transition: transform 0.3s;
+        }
+        
+        .about-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-box h3 {
+            color: #d81b60;
+            margin-bottom: 15px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .about-box h3 i {
+            color: #ff4081;
+        }
+        
+        .about-box p {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        /* Products Page */
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        /* Contact Page */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #880e4f;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ffb6c1;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #d81b60;
+        }
+        
+        .contact-info h3 {
+            color: #d81b60;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            background-color: #ffebee;
+            color: #ff4081;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
+        /* Location Page */
+        .location-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 40px 0;
+        }
+        
+        .location-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .map-placeholder {
+            flex: 1;
+            min-width: 300px;
+            background-color: #ffebee;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #880e4f;
+            font-size: 18px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .location-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #880e4f;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ffd1dc;
+        }
+        
+        .footer-links a {
+            display: block;
+            color: #ffb6c1;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #ff4081;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffb6c1;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-radius: 0 0 15px 15px;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav a {
+                display: block;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 30px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .product-card {
+                width: 100%;
+                max-width: 320px;
+                margin: 15px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-spa"></i></div>
+                <div>
+                    <div class="logo-text">Toko Adee Beauty</div>
+                    <div class="logo-subtext">Skincare & Kosmetik</div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="products">Produk</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">Tentang</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Kontak</a></li>
+                    <li><a href="#" class="nav-link" data-page="location">Lokasi</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Toko Adee Beauty</h1>
+                <p>Skincare & Kosmetik Terbaik untuk Kulit Sehat dan Cantik Alami</p>
+                <div class="search-box">
+                    <input type="text" placeholder="Cari produk skincare...">
+                    <button><i class="fas fa-search"></i> Cari</button>
+                </div>
+            </div>
+            
+            <div class="featured-product">
+                <h2>Produk Unggulan Kami</h2>
+                
+                <!-- PRODUK 1: SCORA BRIGHT ME UP -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://i.ibb.co.com/0jPWzMq2/SCORA-BRIGHTME-UP-SS-SPF-40-PA.jpg" alt="SCORA BRIGHT ME UP Sunscreen SPF 40 PA++++">
+                    </div>
+                    <div class="product-info">
+                        <h3>SCORA BRIGHT ME UP Sunscreen</h3>
+                        <p>Sunscreen SPF 40 PA++++ dengan formula mencerahkan dan melindungi kulit dari sinar UV.</p>
+                        <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20SCORA%20BRIGHT%20ME%20UP%20Sunscreen" target="_blank" class="product-link">
+                            <i class="fab fa-whatsapp"></i> Beli via WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- PRODUK 2: NUFACE GLOWING CREAM -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://i.ibb.co.com/tPXYn77w/NUFACE-GLOWING-CREAM.jpg" alt="NUFACE Glowing Cream">
+                    </div>
+                    <div class="product-info">
+                        <h3>NUFACE Glowing Cream</h3>
+                        <p>Krim pencerah wajah dengan kandungan SALT ZAETIN untuk kulit glowing dan bercahaya.</p>
+                        <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20NUFACE%20Glowing%20Cream" target="_blank" class="product-link">
+                            <i class="fab fa-whatsapp"></i> Beli via WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- PRODUK 3: THE ORIGINOTE RETINOL B3 SERUM -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://i.ibb.co.com/Z6pyJP7m/THE-ORIGINOTE-RETINOL-B3-SERUM.jpg" alt="THE ORIGINOTE RETINOL B3 SERUM">
+                    </div>
+                    <div class="product-info">
+                        <h3>THE ORIGINOTE RETINOL B3 SERUM</h3>
+                        <p>Serum retinol dengan Niacinamide untuk mengurangi kerutan, mencerahkan, dan memperbaiki tekstur kulit.</p>
+                        <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20THE%20ORIGINOTE%20RETINOL%20B3%20SERUM" target="_blank" class="product-link">
+                            <i class="fab fa-whatsapp"></i> Beli via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Page -->
+        <section id="products" class="page">
+            <div class="about-content">
+                <h2>Produk Skincare & Kosmetik</h2>
+                <p>Toko Adee Beauty menyediakan berbagai produk skincare dan kosmetik berkualitas dari brand ternama dengan harga terbaik. Semua produk kami dijamin original dan aman untuk kulit.</p>
+                
+                <div class="category-tabs">
+                    <button class="category-btn active" data-category="all">Semua Produk</button>
+                    <button class="category-btn" data-category="sunscreen">Sunscreen</button>
+                    <button class="category-btn" data-category="cream">Cream</button>
+                    <button class="category-btn" data-category="serum">Serum</button>
+                    <button class="category-btn" data-category="mask">Mask</button>
+                    <button class="category-btn" data-category="makeup">Makeup</button>
+                </div>
+            </div>
+            
+            <div class="products-container">
+                <!-- Category: All Products -->
+                <div class="product-category active" id="category-all">
+                    
+                    <!-- PRODUK 1: SCORA BRIGHT ME UP -->
+                    <div class="product-card" data-category="sunscreen">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/0jPWzMq2/SCORA-BRIGHTME-UP-SS-SPF-40-PA.jpg" alt="SCORA BRIGHT ME UP Sunscreen SPF 40 PA++++">
+                        </div>
+                        <div class="product-info">
+                            <h3>SCORA BRIGHT ME UP Sunscreen</h3>
+                            <p>Sunscreen SPF 40 PA++++ dengan formula mencerahkan, melindungi dari sinar UV, tekstur ringan tidak lengket.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20SCORA%20BRIGHT%20ME%20UP%20Sunscreen" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 2: AMETERASUN SUNSCREEN -->
+                    <div class="product-card" data-category="sunscreen">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/LzZ26x8T/AMETERASUN-SS-SPF-35-PA.jpg" alt="AMETERASUN Sunscreen SPF 35 PA+++++">
+                        </div>
+                        <div class="product-info">
+                            <h3>AMETERASUN Sunscreen SPF 35</h3>
+                            <p>Sunscreen dengan SPF 35 PA+++++, memberikan perlindungan maksimal dari sinar UV, cocok untuk semua jenis kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20AMETERASUN%20Sunscreen%20SPF%2035" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- PRODUK 3: WARDAH ACNE CALMING -->
+                    <div class="product-card" data-category="sunscreen">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/FLHyYh56/WARDAH-SS-ACNE-CALMING-SPF-35-PA-35-ML.jpg" alt="WARDAH Acne Calming Sunscreen SPF 35">
+                        </div>
+                        <div class="product-info">
+                            <h3>WARDAH Acne Calming Sunscreen</h3>
+                            <p>Sunscreen SPF 35 PA+++ khusus kulit berjerawat, menenangkan dan melindungi tanpa menyumbat pori.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20WARDAH%20Acne%20Calming%20Sunscreen" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 4: NUFACE GLOWING CREAM -->
+                    <div class="product-card" data-category="cream">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/tPXYn77w/NUFACE-GLOWING-CREAM.jpg" alt="NUFACE Glowing Cream">
+                        </div>
+                        <div class="product-info">
+                            <h3>NUFACE Glowing Cream</h3>
+                            <p>Krim pencerah wajah dengan kandungan SALT ZAETIN untuk kulit glowing, bercahaya, dan sehat.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20NUFACE%20Glowing%20Cream" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 5: GLAD2GLOW DOUBLE BRIGHT DAY CREAM -->
+                    <div class="product-card" data-category="cream">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/chqMYZ8B/GLAD2-GLOW-DOUBLE-BRIGHT-DAY-CREAM.jpg" alt="GLAD2GLOW Double Bright Day Cream">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLAD2GLOW Double Bright Day Cream</h3>
+                            <p>Krim siang hari dengan Niacinamide Complex dan Panthenol untuk kulit cerah dan lembab sepanjang hari.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLAD2GLOW%20Double%20Bright%20Day%20Cream" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 6: SCORA TONE UP CREAM -->
+                    <div class="product-card" data-category="cream">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/23SZqFjT/SCORA-TONEUP-CREAM.jpg" alt="SCORA Tone Up Cream">
+                        </div>
+                        <div class="product-info">
+                            <h3>SCORA Tone Up Cream</h3>
+                            <p>Krim tone up untuk mencerahkan dan menyamarkan warna kulit tidak merata, memberikan efek glowing natural.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20SCORA%20Tone%20Up%20Cream" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 7: GLOW FIX ACNE PURE SERUM -->
+                    <div class="product-card" data-category="serum">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/prjtsBJw/GLOW-FIX-ACNE-PURE-SERUM.jpg" alt="Glow Fix Acne Pure Serum">
+                        </div>
+                        <div class="product-info">
+                            <h3>Glow Fix Acne Pure Serum</h3>
+                            <p>Serum khusus untuk kulit berjerawat dengan formula yang menenangkan, mengurangi peradangan, dan mencegah jerawat baru.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20Glow%20Fix%20Acne%20Pure%20Serum" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- PRODUK 8: GLOW FIX GLOW BOMB SERUM -->
+                    <div class="product-card" data-category="serum">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/JRW6WWQJ/GLOW-FIX-GLOW-BOMB-SERUM.jpg" alt="Glow Fix Glow Bomb Serum">
+                        </div>
+                        <div class="product-info">
+                            <h3>Glow Fix Glow Bomb Serum</h3>
+                            <p>Serum pencerah intensif untuk kulit glowing maksimal, dengan tekstur ringan dan cepat meresap.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20Glow%20Fix%20Glow%20Bomb%20Serum" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 9: G2G CENTELA POWER ACNE SERUM -->
+                    <div class="product-card" data-category="serum">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/bM7rkWSk/G2-G-CENTELA-POWER-ACNE-SERUM-17-Ml.jpg" alt="G2G CENTELA POWER ACNE SERUM 17 ML">
+                        </div>
+                        <div class="product-info">
+                            <h3>G2G CENTELA POWER ACNE SERUM</h3>
+                            <p>Serum Centella Asiatica 2% dengan Salicylic Acid untuk mengatasi jerawat, menenangkan kulit, dan mengurangi peradangan.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20G2G%20CENTELA%20POWER%20ACNE%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 10: THE ORIGINOTE RETINOL B3 SERUM -->
+                    <div class="product-card" data-category="serum">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/Z6pyJP7m/THE-ORIGINOTE-RETINOL-B3-SERUM.jpg" alt="THE ORIGINOTE RETINOL B3 SERUM">
+                        </div>
+                        <div class="product-info">
+                            <h3>THE ORIGINOTE RETINOL B3 SERUM</h3>
+                            <p>Serum retinol dengan Niacinamide untuk mengurangi kerutan, mencerahkan kulit, dan memperbaiki tekstur kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20THE%20ORIGINOTE%20RETINOL%20B3%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 11: THE ORIGINOTE PEELING SOLUTION -->
+                    <div class="product-card" data-category="serum">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/VYJqB8p2/THE-ORIGINOTE-PEELING-SOLUTION.jpg" alt="THE ORIGINOTE PEELING SOLUTION">
+                        </div>
+                        <div class="product-info">
+                            <h3>THE ORIGINOTE PEELING SOLUTION</h3>
+                            <p>Solusi peeling dengan AHA + BHA + FHA dari Sugar Cane untuk eksfoliasi lembut, mencerahkan dan memperbaharui kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20THE%20ORIGINOTE%20PEELING%20SOLUTION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 12: YESICCAS'S CLEANSING MASQUE CLAY STICK -->
+                    <div class="product-card" data-category="mask">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/S7vjBWkH/YESICCAS-S-CLEANSING-MASQUE-CLAY-STICK-MASKER.jpg" alt="YESICCAS'S CLEANSING MASQUE CLAY STICK">
+                        </div>
+                        <div class="product-info">
+                            <h3>YESICCAS Clay Stick Mask</h3>
+                            <p>Masker tanah liat dalam bentuk stick untuk membersihkan pori, mengontrol minyak, dan mencerahkan kulit wajah.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20YESICCAS%20Clay%20Stick%20Mask" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 13: OMG COVERLAST LIQUID FOUNDATION -->
+                    <div class="product-card" data-category="makeup">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/rGxk6wL5/OMG-COVERLAST-LIQUID-FUNDATION.jpg" alt="OMG COVERLAST LIQUID FOUNDATION">
+                        </div>
+                        <div class="product-info">
+                            <h3>OMG COVERLAST LIQUID FOUNDATION</h3>
+                            <p>Foundation cair dengan coverage tinggi dan tahan lama, memberikan finish flawless sepanjang hari.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20OMG%20COVERLAST%20LIQUID%20FOUNDATION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 14: OMG COVER LAST CUSHION -->
+                    <div class="product-card" data-category="makeup">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/0jsHWfSQ/OMG-COVER-LAST-CUSHION.jpg" alt="OMG COVER LAST CUSHION">
+                        </div>
+                        <div class="product-info">
+                            <h3>OMG COVER LAST CUSHION</h3>
+                            <p>Cushion foundation praktis dengan coverage medium hingga tinggi, mudah diaplikasikan dan touch up.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20OMG%20COVER%20LAST%20CUSHION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 15: GLOWSHOPY CUSHION -->
+                    <div class="product-card" data-category="makeup">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/svRtQQN1/GLOWSHOPY-CUSHION.jpg" alt="GLOWSHOPY CUSHION">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLOWSHOPY CUSHION</h3>
+                            <p>Cushion dengan formula glowing, memberikan efek kulit bercahaya natural dan coverage ringan yang nyaman.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLOWSHOPY%20CUSHION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 16: FOCCALURE TRUE MATTE LIQUID LIPSTIK -->
+                    <div class="product-card" data-category="makeup">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/LhHBXGC6/FOCCALURE-TRUE-MATTE-LIQUID-LIPSTIK.jpg" alt="FOCCALURE TRUE MATTE LIQUID LIPSTIK">
+                        </div>
+                        <div class="product-info">
+                            <h3>FOCCALURE TRUE MATTE LIQUID LIPSTIK</h3>
+                            <p>Lipstik cair matte dengan warna intens, tahan lama, tidak mudah luntur, dan nyaman dipakai sepanjang hari.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20FOCCALURE%20TRUE%20MATTE%20LIQUID%20LIPSTIK" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 17: IMPLORA EYESHADOW & BLUSH ON -->
+                    <div class="product-card" data-category="makeup">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/ZRK0XvB8/IMPLORA-EYESHADOW-BLUSH-ON.jpg" alt="IMPLORA EYESHADOW & BLUSH ON">
+                        </div>
+                        <div class="product-info">
+                            <h3>IMPLORA EYESHADOW & BLUSH ON</h3>
+                            <p>Palet eyeshadow dan blush on dengan warna-warna natural, pigmen tinggi, dan mudah untuk blend.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20IMPLORA%20EYESHADOW%20%26%20BLUSH%20ON" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 18: BROWCARA MADAME GIE -->
+                    <div class="product-card" data-category="makeup">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/d0bTRrTR/BROWCARA-MADAME-GIE.jpg" alt="BROWCARA MADAME GIE">
+                        </div>
+                        <div class="product-info">
+                            <h3>BROWCARA MADAME GIE</h3>
+                            <p>Browcara untuk alis dengan sikat khusus, memberikan definisi alis yang natural dan tahan lama.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20BROWCARA%20MADAME%20GIE" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 19: MASKARA BARENBLISS ROLL TO VOLUME -->
+                    <div class="product-card" data-category="makeup">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/nNpZgDMT/MASKARA-BARENBLISS-ROLL-TO-VOLUME.jpg" alt="MASKARA BARENBLISS ROLL TO VOLUME">
+                        </div>
+                        <div class="product-info">
+                            <h3>MASKARA BARENBLISS ROLL TO VOLUME</h3>
+                            <p>Maskara dengan aplikator roll untuk bulu mata yang terlihat lebih tebal, lentik, dan volume maksimal.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20MASKARA%20BARENBLISS%20ROLL%20TO%20VOLUME" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 20: GLOWSHOPY MOISTURIZER WATERMELON BRIGHTENING -->
+                    <div class="product-card" data-category="cream">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/VYr7Ggm3/GLOWSHOPY-MOISTURIZER-WATERMELON-BRIGHTENING.jpg" alt="GLOWSHOPY MOISTURIZER WATERMELON BRIGHTENING">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLOWSHOPY WATERMELON MOISTURIZER</h3>
+                            <p>Moisturizer dengan ekstrak semangka untuk mencerahkan kulit, melembabkan, dan memberikan efek glowing.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLOWSHOPY%20WATERMELON%20MOISTURIZER" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 21: GLOWSHOPY MOISTURIZER CICA PANTHENOL -->
+                    <div class="product-card" data-category="cream">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/0p0YBWzn/GLOWSHOPY-MOISTURIZER-CICA-PANTHENOL.jpg" alt="GLOWSHOPY MOISTURIZER CICA PANTHENOL">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLOWSHOPY CICA PANTHENOL MOISTURIZER</h3>
+                            <p>Moisturizer dengan Centella Asiatica dan Panthenol untuk menenangkan kulit sensitif dan memperbaiki skin barrier.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLOWSHOPY%20CICA%20PANTHENOL%20MOISTURIZER" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 22: GRACE AND GLOW BODY SERUM -->
+                    <div class="product-card" data-category="serum">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/rKVfzk0X/GRACE-AND-GLOW-BODY-SERUM.jpg" alt="GRACE AND GLOW BODY SERUM">
+                        </div>
+                        <div class="product-info">
+                            <h3>GRACE AND GLOW BODY SERUM</h3>
+                            <p>Body serum untuk mencerahkan dan menghidrasi kulit tubuh, memberikan efek glowing dan lembut.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GRACE%20AND%20GLOW%20BODY%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 23: LAVOJOY SOLVE IT NOW BODY SERUM -->
+                    <div class="product-card" data-category="serum">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/MDN191wy/LAVOJOY-SOLVE-IT-NOW-BODY-SERUM.jpg" alt="LAVOJOY SOLVE IT NOW BODY SERUM">
+                        </div>
+                        <div class="product-info">
+                            <h3>LAVOJOY SOLVE IT NOW BODY SERUM</h3>
+                            <p>Body serum dengan formula khusus untuk mengatasi masalah kulit tubuh, mencerahkan dan melembutkan kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20LAVOJOY%20SOLVE%20IT%20NOW%20BODY%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category: Sunscreen -->
+                <div class="product-category" id="category-sunscreen">
+                    <!-- PRODUK 1: SCORA BRIGHT ME UP -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/0jPWzMq2/SCORA-BRIGHTME-UP-SS-SPF-40-PA.jpg" alt="SCORA BRIGHT ME UP Sunscreen SPF 40 PA++++">
+                        </div>
+                        <div class="product-info">
+                            <h3>SCORA BRIGHT ME UP Sunscreen</h3>
+                            <p>Sunscreen SPF 40 PA++++ dengan formula mencerahkan, melindungi dari sinar UV, tekstur ringan tidak lengket.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20SCORA%20BRIGHT%20ME%20UP%20Sunscreen" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 2: AMETERASUN SUNSCREEN -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/LzZ26x8T/AMETERASUN-SS-SPF-35-PA.jpg" alt="AMETERASUN Sunscreen SPF 35 PA+++++">
+                        </div>
+                        <div class="product-info">
+                            <h3>AMETERASUN Sunscreen SPF 35</h3>
+                            <p>Sunscreen dengan SPF 35 PA+++++, memberikan perlindungan maksimal dari sinar UV, cocok untuk semua jenis kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20AMETERASUN%20Sunscreen%20SPF%2035" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- PRODUK 3: WARDAH ACNE CALMING -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/FLHyYh56/WARDAH-SS-ACNE-CALMING-SPF-35-PA-35-ML.jpg" alt="WARDAH Acne Calming Sunscreen SPF 35">
+                        </div>
+                        <div class="product-info">
+                            <h3>WARDAH Acne Calming Sunscreen</h3>
+                            <p>Sunscreen SPF 35 PA+++ khusus kulit berjerawat, menenangkan dan melindungi tanpa menyumbat pori.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20WARDAH%20Acne%20Calming%20Sunscreen" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category: Cream -->
+                <div class="product-category" id="category-cream">
+                    <!-- PRODUK 1: NUFACE GLOWING CREAM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/tPXYn77w/NUFACE-GLOWING-CREAM.jpg" alt="NUFACE Glowing Cream">
+                        </div>
+                        <div class="product-info">
+                            <h3>NUFACE Glowing Cream</h3>
+                            <p>Krim pencerah wajah dengan kandungan SALT ZAETIN untuk kulit glowing, bercahaya, dan sehat.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20NUFACE%20Glowing%20Cream" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 2: GLAD2GLOW DOUBLE BRIGHT DAY CREAM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/chqMYZ8B/GLAD2-GLOW-DOUBLE-BRIGHT-DAY-CREAM.jpg" alt="GLAD2GLOW Double Bright Day Cream">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLAD2GLOW Double Bright Day Cream</h3>
+                            <p>Krim siang hari dengan Niacinamide Complex dan Panthenol untuk kulit cerah dan lembab sepanjang hari.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLAD2GLOW%20Double%20Bright%20Day%20Cream" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 3: SCORA TONE UP CREAM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/23SZqFjT/SCORA-TONEUP-CREAM.jpg" alt="SCORA Tone Up Cream">
+                        </div>
+                        <div class="product-info">
+                            <h3>SCORA Tone Up Cream</h3>
+                            <p>Krim tone up untuk mencerahkan dan menyamarkan warna kulit tidak merata, memberikan efek glowing natural.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20SCORA%20Tone%20Up%20Cream" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 4: GLOWSHOPY MOISTURIZER WATERMELON BRIGHTENING -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/VYr7Ggm3/GLOWSHOPY-MOISTURIZER-WATERMELON-BRIGHTENING.jpg" alt="GLOWSHOPY MOISTURIZER WATERMELON BRIGHTENING">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLOWSHOPY WATERMELON MOISTURIZER</h3>
+                            <p>Moisturizer dengan ekstrak semangka untuk mencerahkan kulit, melembabkan, dan memberikan efek glowing.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLOWSHOPY%20WATERMELON%20MOISTURIZER" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 5: GLOWSHOPY MOISTURIZER CICA PANTHENOL -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/0p0YBWzn/GLOWSHOPY-MOISTURIZER-CICA-PANTHENOL.jpg" alt="GLOWSHOPY MOISTURIZER CICA PANTHENOL">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLOWSHOPY CICA PANTHENOL MOISTURIZER</h3>
+                            <p>Moisturizer dengan Centella Asiatica dan Panthenol untuk menenangkan kulit sensitif dan memperbaiki skin barrier.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLOWSHOPY%20CICA%20PANTHENOL%20MOISTURIZER" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category: Serum -->
+                <div class="product-category" id="category-serum">
+                    <!-- PRODUK 1: GLOW FIX ACNE PURE SERUM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/prjtsBJw/GLOW-FIX-ACNE-PURE-SERUM.jpg" alt="Glow Fix Acne Pure Serum">
+                        </div>
+                        <div class="product-info">
+                            <h3>Glow Fix Acne Pure Serum</h3>
+                            <p>Serum khusus untuk kulit berjerawat dengan formula yang menenangkan, mengurangi peradangan, dan mencegah jerawat baru.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20Glow%20Fix%20Acne%20Pure%20Serum" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- PRODUK 2: GLOW FIX GLOW BOMB SERUM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/JRW6WWQJ/GLOW-FIX-GLOW-BOMB-SERUM.jpg" alt="Glow Fix Glow Bomb Serum">
+                        </div>
+                        <div class="product-info">
+                            <h3>Glow Fix Glow Bomb Serum</h3>
+                            <p>Serum pencerah intensif untuk kulit glowing maksimal, dengan tekstur ringan dan cepat meresap.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20Glow%20Fix%20Glow%20Bomb%20Serum" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 3: G2G CENTELA POWER ACNE SERUM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/bM7rkWSk/G2-G-CENTELA-POWER-ACNE-SERUM-17-Ml.jpg" alt="G2G CENTELA POWER ACNE SERUM 17 ML">
+                        </div>
+                        <div class="product-info">
+                            <h3>G2G CENTELA POWER ACNE SERUM</h3>
+                            <p>Serum Centella Asiatica 2% dengan Salicylic Acid untuk mengatasi jerawat, menenangkan kulit, dan mengurangi peradangan.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20G2G%20CENTELA%20POWER%20ACNE%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 4: THE ORIGINOTE RETINOL B3 SERUM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/Z6pyJP7m/THE-ORIGINOTE-RETINOL-B3-SERUM.jpg" alt="THE ORIGINOTE RETINOL B3 SERUM">
+                        </div>
+                        <div class="product-info">
+                            <h3>THE ORIGINOTE RETINOL B3 SERUM</h3>
+                            <p>Serum retinol dengan Niacinamide untuk mengurangi kerutan, mencerahkan kulit, dan memperbaiki tekstur kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20THE%20ORIGINOTE%20RETINOL%20B3%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 5: THE ORIGINOTE PEELING SOLUTION -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/VYJqB8p2/THE-ORIGINOTE-PEELING-SOLUTION.jpg" alt="THE ORIGINOTE PEELING SOLUTION">
+                        </div>
+                        <div class="product-info">
+                            <h3>THE ORIGINOTE PEELING SOLUTION</h3>
+                            <p>Solusi peeling dengan AHA + BHA + FHA dari Sugar Cane untuk eksfoliasi lembut, mencerahkan dan memperbaharui kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20THE%20ORIGINOTE%20PEELING%20SOLUTION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 6: GRACE AND GLOW BODY SERUM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/rKVfzk0X/GRACE-AND-GLOW-BODY-SERUM.jpg" alt="GRACE AND GLOW BODY SERUM">
+                        </div>
+                        <div class="product-info">
+                            <h3>GRACE AND GLOW BODY SERUM</h3>
+                            <p>Body serum untuk mencerahkan dan menghidrasi kulit tubuh, memberikan efek glowing dan lembut.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GRACE%20AND%20GLOW%20BODY%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 7: LAVOJOY SOLVE IT NOW BODY SERUM -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/MDN191wy/LAVOJOY-SOLVE-IT-NOW-BODY-SERUM.jpg" alt="LAVOJOY SOLVE IT NOW BODY SERUM">
+                        </div>
+                        <div class="product-info">
+                            <h3>LAVOJOY SOLVE IT NOW BODY SERUM</h3>
+                            <p>Body serum dengan formula khusus untuk mengatasi masalah kulit tubuh, mencerahkan dan melembutkan kulit.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20LAVOJOY%20SOLVE%20IT%20NOW%20BODY%20SERUM" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category: Mask -->
+                <div class="product-category" id="category-mask">
+                    <!-- PRODUK 1: YESICCAS'S CLEANSING MASQUE CLAY STICK -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/S7vjBWkH/YESICCAS-S-CLEANSING-MASQUE-CLAY-STICK-MASKER.jpg" alt="YESICCAS'S CLEANSING MASQUE CLAY STICK">
+                        </div>
+                        <div class="product-info">
+                            <h3>YESICCAS Clay Stick Mask</h3>
+                            <p>Masker tanah liat dalam bentuk stick untuk membersihkan pori, mengontrol minyak, dan mencerahkan kulit wajah.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20YESICCAS%20Clay%20Stick%20Mask" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category: Makeup -->
+                <div class="product-category" id="category-makeup">
+                    <!-- PRODUK 1: OMG COVERLAST LIQUID FOUNDATION -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/rGxk6wL5/OMG-COVERLAST-LIQUID-FUNDATION.jpg" alt="OMG COVERLAST LIQUID FOUNDATION">
+                        </div>
+                        <div class="product-info">
+                            <h3>OMG COVERLAST LIQUID FOUNDATION</h3>
+                            <p>Foundation cair dengan coverage tinggi dan tahan lama, memberikan finish flawless sepanjang hari.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20OMG%20COVERLAST%20LIQUID%20FOUNDATION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 2: OMG COVER LAST CUSHION -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/0jsHWfSQ/OMG-COVER-LAST-CUSHION.jpg" alt="OMG COVER LAST CUSHION">
+                        </div>
+                        <div class="product-info">
+                            <h3>OMG COVER LAST CUSHION</h3>
+                            <p>Cushion foundation praktis dengan coverage medium hingga tinggi, mudah diaplikasikan dan touch up.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20OMG%20COVER%20LAST%20CUSHION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 3: GLOWSHOPY CUSHION -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/svRtQQN1/GLOWSHOPY-CUSHION.jpg" alt="GLOWSHOPY CUSHION">
+                        </div>
+                        <div class="product-info">
+                            <h3>GLOWSHOPY CUSHION</h3>
+                            <p>Cushion dengan formula glowing, memberikan efek kulit bercahaya natural dan coverage ringan yang nyaman.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20GLOWSHOPY%20CUSHION" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 4: FOCCALURE TRUE MATTE LIQUID LIPSTIK -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/LhHBXGC6/FOCCALURE-TRUE-MATTE-LIQUID-LIPSTIK.jpg" alt="FOCCALURE TRUE MATTE LIQUID LIPSTIK">
+                        </div>
+                        <div class="product-info">
+                            <h3>FOCCALURE TRUE MATTE LIQUID LIPSTIK</h3>
+                            <p>Lipstik cair matte dengan warna intens, tahan lama, tidak mudah luntur, dan nyaman dipakai sepanjang hari.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20FOCCALURE%20TRUE%20MATTE%20LIQUID%20LIPSTIK" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 5: IMPLORA EYESHADOW & BLUSH ON -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/ZRK0XvB8/IMPLORA-EYESHADOW-BLUSH-ON.jpg" alt="IMPLORA EYESHADOW & BLUSH ON">
+                        </div>
+                        <div class="product-info">
+                            <h3>IMPLORA EYESHADOW & BLUSH ON</h3>
+                            <p>Palet eyeshadow dan blush on dengan warna-warna natural, pigmen tinggi, dan mudah untuk blend.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20IMPLORA%20EYESHADOW%20%26%20BLUSH%20ON" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 6: BROWCARA MADAME GIE -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/d0bTRrTR/BROWCARA-MADAME-GIE.jpg" alt="BROWCARA MADAME GIE">
+                        </div>
+                        <div class="product-info">
+                            <h3>BROWCARA MADAME GIE</h3>
+                            <p>Browcara untuk alis dengan sikat khusus, memberikan definisi alis yang natural dan tahan lama.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20BROWCARA%20MADAME%20GIE" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUK 7: MASKARA BARENBLISS ROLL TO VOLUME -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://i.ibb.co.com/nNpZgDMT/MASKARA-BARENBLISS-ROLL-TO-VOLUME.jpg" alt="MASKARA BARENBLISS ROLL TO VOLUME">
+                        </div>
+                        <div class="product-info">
+                            <h3>MASKARA BARENBLISS ROLL TO VOLUME</h3>
+                            <p>Maskara dengan aplikator roll untuk bulu mata yang terlihat lebih tebal, lentik, dan volume maksimal.</p>
+                            <a href="https://wa.me/6285146064493?text=Halo,%20saya%20tertarik%20dengan%20produk%20MASKARA%20BARENBLISS%20ROLL%20TO%20VOLUME" target="_blank" class="product-link">
+                                <i class="fab fa-whatsapp"></i> Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page (Sederhana) -->
+        <section id="about" class="page">
+            <div class="about-content">
+                <h2>Tentang Toko Adee Beauty</h2>
+                <p>Berikut adalah informasi lengkap tentang toko kami:</p>
+            </div>
+            
+            <div class="about-simple">
+                <div class="about-box">
+                    <h3><i class="fas fa-store"></i> Tentang Kami</h3>
+                    <p>Toko Adee Beauty didirikan pada tahun 2024 dengan misi memberikan produk skincare dan kosmetik berkualitas tinggi dengan harga terjangkau. Kami percaya bahwa setiap orang berhak memiliki kulit sehat dan cantik tanpa harus mengeluarkan biaya besar.</p>
+                </div>
+                
+                <div class="about-box">
+                    <h3><i class="fas fa-bullseye"></i> Visi & Misi</h3>
+                    <p><strong>Visi:</strong> Menjadi toko skincare dan kosmetik terdepan yang tidak hanya menjual produk, tetapi juga memberikan edukasi tentang perawatan kulit yang benar.</p>
+                    <p><strong>Misi:</strong> Menyediakan produk original dengan standar kualitas tertinggi dan layanan konsultasi gratis untuk membantu pelanggan menemukan produk yang tepat.</p>
+                </div>
+                
+                <div class="about-box">
+                    <h3><i class="fas fa-users"></i> Tim Kami</h3>
+                    <p>Tim kami terdiri dari beauty enthusiast yang berpengalaman dan selalu mengupdate pengetahuan tentang perkembangan produk skincare terbaru. Kami siap membantu Anda menemukan produk yang tepat sesuai jenis dan kebutuhan kulit.</p>
+                </div>
+                
+                <div class="about-box">
+                    <h3><i class="fas fa-award"></i> Komitmen Kualitas</h3>
+                    <p>Kami berkomitmen untuk menyediakan produk 100% original dengan garansi. Semua produk melalui proses seleksi ketat untuk memastikan kualitas dan keamanannya untuk kulit Anda.</p>
+                </div>
+                
+                <div class="about-box">
+                    <h3><i class="fas fa-heart"></i> Layanan Pelanggan</h3>
+                    <p>Kami memberikan konsultasi gratis untuk pemilihan produk, pengiriman cepat ke seluruh Indonesia, dan layanan customer service yang responsif. Kepuasan pelanggan adalah prioritas utama kami.</p>
+                </div>
+                
+                <div class="about-box">
+                    <h3><i class="fas fa-star"></i> Keunggulan Kami</h3>
+                    <ul>
+                        <li>Produk 100% Original dengan garansi</li>
+                        <li>Harga kompetitif dan terjangkau</li>
+                        <li>Konsultasi gratis oleh ahli</li>
+                        <li>Pengiriman cepat ke seluruh Indonesia</li>
+                        <li>Layanan customer service 24/7</li>
+                        <li>Berpengalaman sejak 2024</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page">
+            <div class="about-content">
+                <h2>Hubungi Kami</h2>
+                <p>Kami siap membantu Anda! Silakan hubungi kami melalui form kontak atau informasi di bawah ini.</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Kirim Pesan</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">No. Telepon/WhatsApp</label>
+                            <input type="tel" id="phone" placeholder="+62 851-4606-4493" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="product">Produk yang Diminati</label>
+                            <input type="text" id="product" placeholder="Contoh: SCORA BRIGHT ME UP Sunscreen">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Kirim Pesan</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Informasi Kontak</h3>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Alamat Toko</h4>
+                            <p>Jl. Landaung, No.5 Pangkajene<br>Sulawesi Selatan, Kab. Sidenreng Rappang</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Telepon/WhatsApp</h4>
+                            <p><a href="tel:+6285146064493" style="color: #d81b60; text-decoration: none;">(+62) 851-4606-4493</a><br>
+                            <a href="https://wa.me/6285146064493" target="_blank" style="color: #d81b60; text-decoration: none;">Klik untuk WhatsApp</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div>
+                            <h4>Instagram</h4>
+                            <p><a href="https://www.instagram.com/adeeebeauty__?igsh=MjVjOHU5YWNicG13&utm_source=qr" target="_blank" style="color: #d81b60; text-decoration: none;">@adeeebeauty__</a><br>Info produk terbaru & promo</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Jam Operasional</h4>
+                            <p>Senin - Minggu: 09:00 - 23:00 WITA</p>
+                            <p>Buka setiap hari termasuk hari libur</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div>
+                            <h4>Cara Order</h4>
+                            <p>1. Pilih produk yang diinginkan<br>
+                            2. Hubungi kami via WhatsApp<br>
+                            3. Konfirmasi pembayaran<br>
+                            4. Produk dikirim ke alamat Anda</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Page -->
+        <section id="location" class="page">
+            <div class="about-content">
+                <h2>Lokasi Toko</h2>
+                <p>Kunjungi toko fisik kami di lokasi berikut untuk pengalaman berbelanja yang lebih personal dan konsultasi gratis dengan beauty advisor kami.</p>
+            </div>
+            
+            <div class="location-container">
+                <h3>Toko Adee Beauty - Pangkajene</h3>
+                
+                <div class="location-info">
+                    <div class="map-placeholder">
+                        <div>
+                            <i class="fas fa-map-marked-alt" style="font-size: 48px; margin-bottom: 15px;"></i>
+                            <p>Peta Lokasi Toko Adee Beauty</p>
+                            <p>Jl. Landaung, No.5 Pangkajene</p>
+                            <p>Kab. Sidenreng Rappang, Sulawesi Selatan</p>
+                            <p><small>(Tampilan peta interaktif akan ditampilkan di sini)</small></p>
+                            <a href="https://maps.google.com/?q=Jl.+Landaung,+No.5+Pangkajene,+Sidenreng+Rappang,+Sulawesi+Selatan" target="_blank" style="color: #ff4081; margin-top: 10px; display: inline-block;">Buka di Google Maps</a>
+                        </div>
+                    </div>
+                    
+                    <div class="location-details">
+                        <h4>Detail Lokasi</h4>
+                        <p>Toko kami terletak di pusat kota Pangkajene, Kab. Sidenreng Rappang, mudah diakses dengan kendaraan pribadi maupun transportasi umum.</p>
+                        
+                        <h4 style="margin-top: 25px;">Akses Transportasi</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Dekat dengan Puskemas Pangkajene</li>
+                            <li>5 menit dari Taman Usman Isa</li>
+                            <li>Akses mudah dari jalan utama</li>
+                            <li>Tersedia area parkir yang luas</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 25px;">Layanan di Toko</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Konsultasi kulit gratis oleh ahli</li>
+                            <li>Test produk sebelum membeli</li>
+                            <li>Gift wrapping untuk hadiah</li>
+                            <li>Membership card untuk diskon khusus</li>
+                            <li>Demo penggunaan produk</li>
+                            <li>Panduan skincare routine personal</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 25px;">Petunjuk Pengunjung</h4>
+                        <p>Untuk pengalaman berbelanja terbaik, disarankan untuk membuat janji terlebih dahulu melalui WhatsApp agar kami dapat mempersiapkan konsultasi yang sesuai dengan kebutuhan kulit Anda.</p>
+                        
+                        <a href="https://wa.me/6285146064493?text=Halo,%20saya%20ingin%20membuat%20janji%20untuk%20konsultasi%20kulit%20di%20toko" target="_blank" class="product-link" style="margin-top: 20px; display: inline-block;">Buat Janji Konsultasi</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Toko Adee Beauty</h3>
+                    <p>Penyedia skincare & kosmetik berkualitas dengan harga terjangkau. Komitmen kami adalah membuat kulit sehat dan cantik dapat dinikmati oleh semua orang.</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/adeeebeauty__?igsh=MjVjOHU5YWNicG13&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6285146064493" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.tiktok.com/@adeeebeauty" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://facebook.com/adeeebeauty" target="_blank"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Link Cepat</h3>
+                    <div class="footer-links">
+                        <a href="#" data-page="home">Home</a>
+                        <a href="#" data-page="products">Produk</a>
+                        <a href="#" data-page="about">Tentang Kami</a>
+                        <a href="#" data-page="contact">Kontak</a>
+                        <a href="#" data-page="location">Lokasi</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Produk Populer</h3>
+                    <div class="footer-links">
+                        <a href="#" data-page="products">SCORA BRIGHT ME UP</a>
+                        <a href="#" data-page="products">NUFACE Glowing Cream</a>
+                        <a href="#" data-page="products">AMETERASUN Sunscreen</a>
+                        <a href="#" data-page="products">THE ORIGINOTE RETINOL</a>
+                        <a href="#" data-page="products">GLOWSHOPY CUSHION</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <div class="footer-links">
+                        <a href="tel:+6285146064493"><i class="fas fa-phone"></i> (+62) 851-4606-4493</a>
+                        <a href="https://wa.me/6285146064493" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="https://www.instagram.com/adeeebeauty__?igsh=MjVjOHU5YWNicG13&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i> @adeeebeauty__</a>
+                        <a href="#" data-page="location"><i class="fas fa-map-marker-alt"></i> Pangkajene, Sidenreng Rappang</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Toko Adee Beauty - Skincare & Kosmetik. All rights reserved.</p>
+                <p style="margin-top: 5px;">Website ini dapat diakses oleh semua pengguna dengan pengalaman berbelanja yang nyaman dan mudah.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const productCategories = document.querySelectorAll('.product-category');
+            
+            // Navigation between pages
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Update active nav link
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target page
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === targetPage) {
+                            page.classList.add('active');
+                        }
+                    });
+                    
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                    
+                    // Scroll to top when changing pages
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // Category filtering
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active category button
+                    categoryBtns.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show selected category
+                    productCategories.forEach(cat => {
+                        cat.classList.remove('active');
+                        if (cat.id === `category-${category}`) {
+                            cat.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const phone = document.getElementById('phone').value;
+                    const product = document.getElementById('product').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Create WhatsApp message
+                    const whatsappMessage = `Halo Toko Adee Beauty,%0A%0ANama: ${name}%0ATelepon: ${phone}%0AProduk: ${product || 'Tidak disebutkan'}%0APesan: ${message}%0A%0ATerima kasih.`;
+                    
+                    // Open WhatsApp
+                    window.open(`https://wa.me/6285146064493?text=${whatsappMessage}`, '_blank');
+                    
+                    // Show confirmation
+                    alert('Terima kasih! Anda akan diarahkan ke WhatsApp untuk mengirim pesan. Pastikan nomor (+62) 851-4606-4493 tersimpan di kontak Anda.');
+                    
+                    contactForm.reset();
+                });
+            }
+            
+            // Search functionality
+            const searchInput = document.querySelector('.search-box input');
+            const searchButton = document.querySelector('.search-box button');
+            
+            searchButton.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm.trim() !== '') {
+                    // Switch to products page
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    document.querySelector('.nav-link[data-page="products"]').classList.add('active');
+                    
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === 'products') {
+                            page.classList.add('active');
+                        }
+                    });
+                    
+                    // Filter products
+                    const productCards = document.querySelectorAll('.product-card');
+                    let found = false;
+                    
+                    productCards.forEach(card => {
+                        const title = card.querySelector('h3').textContent.toLowerCase();
+                        const description = card.querySelector('p').textContent.toLowerCase();
+                        
+                        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                            card.style.display = 'inline-block';
+                            found = true;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    if (!found) {
+                        alert(`Produk dengan kata kunci "${searchTerm}" tidak ditemukan. Silakan coba kata kunci lain.`);
+                    }
+                    
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                    
+                    // Scroll to products section
+                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            
+            // Search on Enter key
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchButton.click();
+                }
+            });
+            
+            // Footer links navigation
+            const footerLinks = document.querySelectorAll('.footer-links a[data-page]');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Update active nav link
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    document.querySelector(`.nav-link[data-page="${targetPage}"]`).classList.add('active');
+                    
+                    // Show target page
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === targetPage) {
+                            page.classList.add('active');
+                        }
+                    });
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            
+            // Initialize product cards to show all by default
+            const initProductCards = document.querySelectorAll('#category-all .product-card');
+            initProductCards.forEach(card => {
+                card.style.display = 'inline-block';
+            });
+        });
+    </script>
+</body>
+</html>
